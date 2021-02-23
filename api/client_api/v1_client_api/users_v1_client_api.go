@@ -1,6 +1,8 @@
 package v1_client_api
 
 import (
+	"ehsan_esmaeili/function"
+	"ehsan_esmaeili/middleware"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -9,6 +11,10 @@ import (
 )
 
 func GetAllUsers(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	err := middleware.CheckAuthentication(w, r)
+	if err != nil {
+		return
+	}
 	//header
 	fmt.Println("All Header")
 	fmt.Println(r.Header)
@@ -62,6 +68,17 @@ func AddUsers(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode("")
+	return
+}
+func GetToken(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	t, err := function.GenerateJWT()
+	if err != nil {
+		fmt.Errorf(err.Error())
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(t)
 	return
 }
 
