@@ -3,6 +3,8 @@ package v1_client_api
 import (
 	"ehsan_esmaeili/function"
 	"ehsan_esmaeili/middleware"
+	"ehsan_esmaeili/model"
+	"ehsan_esmaeili/usecase"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -85,4 +87,21 @@ func GetToken(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 type getUser struct {
 	Name   string
 	Family string
+}
+
+func AddUserDB(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	t, err := function.GenerateJWT()
+	if err != nil {
+		fmt.Errorf(err.Error())
+	}
+
+	usecase.UserUse.InsertUser(&model.User{
+		Id:     10,
+		Name:   "sdfhajkhd",
+		Family: "sdajhk",
+	})
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(t)
+	return
 }
