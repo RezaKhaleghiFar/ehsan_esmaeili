@@ -17,7 +17,7 @@ func GenerateJWT() (string, error) {
 	// claims["uid"] = userId
 	// claims["agent"] = agent
 	// claims["group"] = config.Group_Clent
-	claims["exp"] = time.Now().Add(time.Second * 10).Unix() //expire time
+	claims["exp"] = time.Now().Add(time.Hour * 10).Unix() //expire time
 
 	tokenString, err := token.SignedString([]byte(config.Jwt_Signing_Key))
 

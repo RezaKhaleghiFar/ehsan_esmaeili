@@ -5,8 +5,9 @@ import (
 	"ehsan_esmaeili/repository"
 )
 
+
 type UserUsecase interface {
-	InsertUser(user *model.User)
+	InsertUser(user *model.User) (use *model.GetaUser, err error )
 }
 
 type UserUsecaseSqlServer struct {
@@ -20,6 +21,7 @@ func NewUserUsecaseSqlServer(userRepositorySqlServer *repository.UserRepositoryS
 		userRepositorySqlServer: userRepositorySqlServer,
 	}
 }
-func (u *UserUsecaseSqlServer) InsertUser(user *model.User) {
-	u.InsertUser(user)
+func (u *UserUsecaseSqlServer) InsertUser(user *model.User) (use *model.GetaUser, err error ) {
+	return u.userRepositorySqlServer.Insert(user)
+
 }

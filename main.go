@@ -17,7 +17,8 @@ func main() {
 	fmt.Println("Server Run On the : %s", config.Server_Url)
 	db, err := database.ConnectToSqlServerDB()
 	if err != nil {
-		fmt.Errorf("eroro sql", err)
+		fmt.Printf("eroro sql", err)
+		return
 	}
 	usecase.UsecaseInit(db)
 

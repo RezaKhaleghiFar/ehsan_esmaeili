@@ -2,6 +2,7 @@ package route
 
 import (
 	"ehsan_esmaeili/route/client_route"
+//	"ehsan_esmaeili/route/panel_route"
 
 	"github.com/julienschmidt/httprouter"
 )

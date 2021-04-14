@@ -16,7 +16,6 @@ func CheckAuthentication(w http.ResponseWriter, r *http.Request) error {
 		}
 		return []byte(config.Jwt_Signing_Key), nil
 	})
-
 	if err != nil {
 		fmt.Println(err)
 		w.Header().Set("Content-Type", "application/json")
